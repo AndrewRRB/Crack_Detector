@@ -1,6 +1,10 @@
 import cv2
 import os
 from preprocess import load_and_preprocess
+from edge_detector import detect_edges
+from morphology import clean_crack_mask
+
+# from marr_hildreth import detect_edges_mh
 
 def main():
     # Grab a sample image from your raw data folder
@@ -12,10 +16,16 @@ def main():
     try:
         # Run Step 1: Preprocessing
         original, preprocessed = load_and_preprocess(image_path)
+
+        edges = detect_edges(preprocessed, low_threshold=50, high_threshold=150)
         
+        clean_edges = clean_crack_mask(edges, kernel_size=5)
+
         # Display the results
         cv2.imshow("Original Concrete", original)
         cv2.imshow("Preprocessed (Grayscale + Blurred)", preprocessed)
+        cv2.imshow("Detected Cracks (Edges)", edges)
+        cv2.imshow("Cleaned Crack Mask", clean_edges)
         
         print("[INFO] Boom. Images loaded. Press any key on the image window to close.")
         cv2.waitKey(0)
