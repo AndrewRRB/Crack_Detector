@@ -1,0 +1,25 @@
+# Environments
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# IDE Files
+.vscode/
+.idea/
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# Project Specific (Blocks the big images, but keeps the folder structure)
+data/raw/*
+!data/raw/.gitkeep
+
+data/processed/*
+!data/processed/.gitkeep
+
+output/*
+!output/.gitkeep
