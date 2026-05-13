@@ -1,15 +1,19 @@
 import cv2
 import os
+import sys
 from preprocess import load_and_preprocess
 from edge_detector import detect_edges
 from morphology import clean_crack_mask
 
 # from marr_hildreth import detect_edges_mh
 
-def main():
-    # Grab a sample image from your raw data folder
-    # Make sure you actually drop an image named 'sample_crack.jpg' in there first!
-    image_path = os.path.join("..", "data", "raw", "00001.jpg") 
+def main(image_path=None):
+    # Image path is passed in from the GUI launcher via sys.argv.
+    if image_path is None:
+        if len(sys.argv) < 2:
+            print("[ERROR] No image path provided. Run via launcher.py.")
+            return
+        image_path = sys.argv[1]
     
     print("[INFO] Firing up the Crack Detection Pipeline...")
     
@@ -17,7 +21,7 @@ def main():
         # Run Step 1: Preprocessing
         original, preprocessed = load_and_preprocess(image_path)
 
-        edges = detect_edges(preprocessed, low_threshold=50, high_threshold=150)
+        edges = detect_edges(preprocessed, low_threshold=50, high_threshold=90)
         
         clean_edges = clean_crack_mask(edges, kernel_size=5)
 

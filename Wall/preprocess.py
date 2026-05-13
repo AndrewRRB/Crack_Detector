@@ -7,7 +7,7 @@ def load_and_preprocess(image_path):
     if img is None:
         raise FileNotFoundError(f"Bro, I can't find the image at {image_path}. Check your path!")
     
-    # 2. Convert to grayscale (color is useless for finding structural cracks)
+    # 2. Convert to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     
     # 3. Spatial Filtering (Gaussian Blur)
