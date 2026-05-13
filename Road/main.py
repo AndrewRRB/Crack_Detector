@@ -41,12 +41,12 @@ def main(image_path=None):
             print(f"[DETECTED] Crack found ({crack_pixels}px)")
             final_visual = overlay_mask(original, edges)
             cv2.putText(final_visual, "DEFECT DETECTED", (20, 40), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
         else:
             print("[CLEAR] No cracks detected.")
             final_visual = original.copy()
             cv2.putText(final_visual, "SURFACE CLEAR", (20, 40), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
         
         # Display all pipeline stages

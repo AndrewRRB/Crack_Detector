@@ -10,9 +10,7 @@ def load_and_preprocess(image_path):
     # 2. Convert to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     
-    # 3. Spatial Filtering (Gaussian Blur)
-    # The (5, 5) is the kernel size. If the concrete is super noisy, bump it to (7, 7).
-    # blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    # 3. Spatial Filtering (Bilateral Blur)
     blurred = cv2.bilateralFilter(gray, 9, 75, 75)  # Better at preserving edges than Gaussian Blur
 
     return img, blurred
